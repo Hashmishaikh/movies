@@ -1,23 +1,19 @@
-import logo from './logo.svg';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Popular from './Popular';
+import SingleMovie from './SingleMovie';
+import TopRated from './TopRated';
+import UpComing from './UpComing';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Routes>
+     <Route path="/" element={<Popular />} />
+     <Route path="/top-rated" element={<TopRated />} />
+     <Route path="/upcoming" element={<UpComing />} />
+     <Route path="/popular/:id" element={<SingleMovie />} />
+     </Routes>
     </div>
   );
 }
