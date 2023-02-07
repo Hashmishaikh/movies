@@ -1,7 +1,15 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const Navbar = () => {
+    const [gettingSearch,setGettingSearch] = useState("")
+    const searchMovie = async (e) => {
+        e.preventDefault();
+        console.log('e.target.value', gettingSearch)
+        const data = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US&query=${gettingSearch}`)
+        console.log('data', data)
+    }
     return (
         <div><nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -22,8 +30,8 @@ const Navbar = () => {
                         </li>
 
                     </ul>
-                    <form className="d-flex">
-                        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <form className="d-flex" onSubmit={(e) => searchMovie(e)}>
+                        <input className="form-control me-2" type="search" value={gettingSearch} onChange={(e) => setGettingSearch(e.target.value)} placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
