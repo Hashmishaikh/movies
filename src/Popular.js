@@ -7,6 +7,7 @@ import './App.css'
 
 const Popular = () => {
     const [getMovie, setGetMovie] = useState([]);
+    const [searchedMovie, setSearchedMovie] = useState([])
     // logic for pagination
     const [pageNumber, setPageNumber] = useState(0);
     const [pagePerUsers, setPagePerUsers] = useState(5);
@@ -32,28 +33,26 @@ const Popular = () => {
         setGetMovie(data?.data?.results)
     }
 
-
-
-    console.log('ma', getMovie.length)
+    const searchMovie = async (e, gettingSearch) => {
+        e.preventDefault();
+        console.log('e.target.value', gettingSearch)
+        const data = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US&query=${gettingSearch}`)
+        console.log('data', data)
+        // setSearchedMovie(data?.data?.results)
+        setGetMovie(data?.data?.results)
+    }
+    console.log('searchedMovie', searchedMovie.length)
 
     useEffect(() => {
         apidata();
     }, [])
     return (
         <div>
-            <div><Navbar /></div><br />
+            <div><Navbar searchMovie={searchMovie} /></div><br />
+
             <div className='container'>
                 <div className="row">
                     {getMovie?.slice(pageVisited, pageVisited + usersPerPage).map((res) => (
-                        //         <Link style={{textDecoration:"none"}} key={res.id} to={`/popular/${res.id}`} className='col-sm-12 col-md-6 col-lg-3'>
-                        //         <div className="card" style={{width: "16rem",backgroundColor:"rgb(32, 32, 32)"}}>
-                        //   <img src={`https://image.tmdb.org/t/p/w500${res.backdrop_path}`} className="card-img-top" alt="..."/>
-                        //   <div className="card-body" style={{color:"#fff"}}>
-                        //     <p className="card-text">{res?.title}</p>
-                        //     <p className="card-text">Rating:{res?.vote_average}</p>
-                        //   </div>
-                        // </div><br/>
-                        // </Link>
                         <CardMapping backdrop_path={res.backdrop_path} title={res.title} vote_average={res.vote_average} id={res.id} />
                     ))}
                 </div>
@@ -81,6 +80,7 @@ const Popular = () => {
                     />
                 </div>
             </div>
+
         </div>
     )
 }

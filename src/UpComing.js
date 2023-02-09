@@ -11,13 +11,21 @@ const UpComing = () => {
         setUpcomingMovies(data?.data?.results)
     }
 
+    const searchMovie = async (e, gettingSearch) => {
+        e.preventDefault();
+        console.log('e.target.value', gettingSearch)
+        const data = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=c45a857c193f6302f2b5061c3b85e743&language=en-US&query=${gettingSearch}`)
+        console.log('data', data)
+        setUpcomingMovies(data?.data?.results)
+    }
+
     useEffect(() => {
         forUpComming();
     }, [])
 
     return (
         <div>
-            <div><Navbar /></div>
+            <div><Navbar searchMovie={searchMovie} /></div>
             <div className='container'>
                 <div className='row'>
                     {
