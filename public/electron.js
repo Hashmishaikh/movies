@@ -20,6 +20,7 @@ function createWindow() {
     width: 1024,
     height: 1024,
     title: "Movie Destop App",
+    autoHideMenuBar:true,
     webPreferences: {
       nodeIntegration: true
     }
