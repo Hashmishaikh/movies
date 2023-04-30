@@ -19,7 +19,11 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 1024,
-    title: "Movie Destop App"
+    title: "Movie Destop App",
+    webPreferences: {
+      nodeIntegration: true
+    }
+
   });
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${__dirname}/../build/index.html`);
   mainWindow.on('closed', function () {

@@ -4,6 +4,9 @@
   "description": "Chat web app",
   "homepage": "./",
   "private": true,
+  "author": "Hashmi Shaikh",
+  "license": "DungenTime.inc",
+  "main": "public/electron.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -17,7 +20,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "main": "public/electron.js",
+  "build": {
+    "appId": "com.example.myapp",
+    "productName": "Dungen Movie App",
+    "win": {
+      "icon": "icon.ico"
+    }
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,6 +36,7 @@
     "electron": "wait-on tcp:3000 && electron .",
     "electron-pack": "electron-builder -c.extraMetadata.main=build/electron.js --win"
   },
+ 
   "eslintConfig": {
     "extends": [
       "react-app",
